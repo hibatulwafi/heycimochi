@@ -176,8 +176,18 @@ const socials = computed(() => activeSocials())
 
       <!-- Two columns even on the narrowest screens: these cards are 9:16, so
            a single full-width column is ~660px tall apiece on a phone. -->
+      <!--
+        Teaser cards stay click-to-load even when /socials auto-loads. Three
+        live embeds measurably slowed the landing page on arrival and while
+        scrolling, and this section only links through to the full gallery.
+      -->
       <div class="mt-8 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
-        <SocialVideoCard v-for="video in featuredVideos" :key="video.id" :video="video" />
+        <SocialVideoCard
+          v-for="video in featuredVideos"
+          :key="video.id"
+          :video="video"
+          :auto-load="false"
+        />
       </div>
     </div>
   </section>

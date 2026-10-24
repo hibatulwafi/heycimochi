@@ -16,6 +16,21 @@ export default {
   ],
   footerNote: 'Dibuat dengan ikan kering dan terlalu banyak foto kucing.',
 
+  embeds: {
+    /**
+     * Load video embeds as they scroll into view instead of waiting for a tap.
+     *
+     * Trade-off, stated plainly: with this on, Instagram and TikTok receive
+     * every visitor's IP, referrer and cookies without the visitor choosing to
+     * play anything. Set it to false to go back to click-to-load, where
+     * /socials makes zero third-party requests until someone presses play.
+     *
+     * Even when on, loading is deferred until a card is near the viewport —
+     * eight embeds firing at once on page load would be slow for everyone.
+     */
+    autoLoad: true
+  },
+
   /** Open-collaboration contact, shown on /socials and in the footer. */
   collaboration: {
     title: 'Open collaboration',

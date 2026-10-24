@@ -110,18 +110,37 @@ links out to `videoUrl`. `embedUrl` is optional:
 
 | Platform | Embed URL format |
 |---|---|
-| Instagram | `https://www.instagram.com/reel/<SHORTCODE>/embed` |
-| TikTok | `https://www.tiktok.com/embed/v2/<VIDEO_ID>` |
+| Instagram | `https://www.instagram.com/p/<SHORTCODE>/embed` (works for `/p/` and `/reel/`) |
+| TikTok | `https://www.tiktok.com/player/v1/<VIDEO_ID>` |
 | YouTube | `https://www.youtube-nocookie.com/embed/<VIDEO_ID>` |
+
+`player/v1` is what TikTok's own oEmbed endpoint returns today; the older
+`/embed/v2/` path is superseded. Confirm with:
+`curl "https://www.tiktok.com/oembed?url=<VIDEO_URL>"`.
 
 Three deliberate behaviours:
 
-1. **Click to load.** The `<iframe>` is only created when a visitor presses
-   play, so opening `/socials` makes zero third-party requests.
+1. **Auto-load, deferred to the viewport.** Controlled by
+   `siteConfig.embeds.autoLoad`. Cards load as they scroll into range rather
+   than all at once, so nothing nobody looks at is ever requested.
+
+   > **Privacy trade-off.** With this on, Instagram and TikTok receive every
+   > visitor's IP, referrer and cookies without the visitor choosing to play
+   > anything. Setting `autoLoad: false` restores click-to-load, where
+   > `/socials` makes *zero* third-party requests until someone presses play.
+   > Both modes are supported; the flag is the only thing to change.
+
 2. **Load watchdog.** A cross-origin iframe fires `load` even for an error page,
    so `load` can't prove success — but an 8s timeout catches blocked embeds,
    deleted posts and offline failures, and flips the card to a fallback.
 3. **The source link survives every state**, including failure.
+
+**Embed height is platform-specific.** Instagram wraps roughly 196px of chrome
+(header, "View more", action row, like count) around a 9:16 clip, so a plain
+9:16 box leaves the embed scrolling inside itself. That chrome is a fixed pixel
+amount, not a ratio, hence `height: calc(177.78% + 196px)` rather than an
+aspect-ratio class — the extra has to stay constant as the card widens.
+TikTok's player already ships at 9:16 with its UI overlaid and needs nothing.
 
 Leave `embedUrl: ''` for platforms that refuse embedding; the card still works
 as a link.

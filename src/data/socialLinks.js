@@ -7,16 +7,16 @@
 export default {
   instagram: {
     label: 'Instagram',
-    username: '',
-    profileUrl: '',
-    enabled: false,
+    username: 'heycimochi',
+    profileUrl: 'https://www.instagram.com/heycimochi/',
+    enabled: true,
     cta: 'Follow'
   },
   tiktok: {
     label: 'TikTok',
-    username: '',
-    profileUrl: '',
-    enabled: false,
+    username: 'mochihimalayancat0',
+    profileUrl: 'https://www.tiktok.com/@mochihimalayancat0',
+    enabled: true,
     cta: 'Follow'
   },
   youtube: {

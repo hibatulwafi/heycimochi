@@ -25,8 +25,8 @@ and save them here under those exact names.
 |---|---|---|
 | `cat-profile.jpg` | Profile photo on `/cat` + homepage preview | square, 800×800 |
 | `gallery-01.jpg` … `gallery-06.jpg` | Album grid on `/cat` | square, 800×800 |
-| `memory-01.jpg` … `memory-09.jpg` | Cards on `/memories` | landscape 4:3, 1000×750 |
-| `video-01.jpg` … `video-04.jpg` | Video thumbnails on `/socials` | portrait 9:16, 720×1280 |
+| `memory-01.jpg` … `memory-10.jpg` | Cards on `/memories` | landscape 4:3, 1000×750 |
+| `video-01.jpg` … `video-08.jpg` | Video thumbnails on `/socials` | portrait 9:16, 720×1280 |
 
 To change a filename, edit the matching entry in `src/data/catProfile.js`,
 `src/data/memories.js`, or `src/data/socialVideos.js` — the components read the

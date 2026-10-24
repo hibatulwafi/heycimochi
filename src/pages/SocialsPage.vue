@@ -48,7 +48,7 @@ const PLATFORM_LABELS = { all: 'Semua', instagram: 'Instagram', tiktok: 'TikTok'
           :href="account.profileUrl"
           target="_blank"
           rel="noopener noreferrer"
-          class="cozy-card cozy-card-hover flex items-center gap-4 p-5"
+          class="cozy-card cozy-card-hover flex min-w-0 items-center gap-3 p-4 sm:gap-4 sm:p-5"
         >
           <span
             class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-2 border-cream-deep bg-cream text-ink-soft"
@@ -86,7 +86,7 @@ const PLATFORM_LABELS = { all: 'Semua', instagram: 'Instagram', tiktok: 'TikTok'
         <SectionHeading
           eyebrow="Video"
           title="Kartu video"
-          subtitle="Daftar video dikurasi manual. Tekan play untuk memuat embed resmi."
+          subtitle="Daftar video dikurasi manual, dimuat langsung dari Instagram dan TikTok."
         />
 
         <div v-if="platforms.length > 2" class="flex flex-wrap gap-2" role="group" aria-label="Filter platform">
