@@ -1,0 +1,348 @@
+@import 'tailwindcss';
+
+/* Self-hosted so no visitor data leaks to a font CDN (PRD §10).
+   Display face only — Press Start 2P is unreadable as body copy. */
+@import '@fontsource/press-start-2p/400.css';
+
+@theme {
+  /*
+   * Mirrors src/pixel/palette.js — keep the two in sync.
+   *
+   * Every colour comes from Mochi's reference photos: ivory coat, mocha
+   * points, blue eyes, the gold bell on her bow, and the rose backdrop.
+   * Mocha is the primary UI colour because it is the cat; rose is the accent.
+   */
+  --color-cream: #f7f0e4;
+  --color-cream-deep: #e8dcc6;
+  --color-paper: #fdfaf3;
+
+  /* Her points — ears, mask, paws, tail. Primary actions and structure. */
+  --color-mocha-light: #ded0bf;
+  --color-mocha: #a89078;
+  --color-mocha-deep: #7a6252;
+  --color-mocha-shadow: #594a3e;
+
+  /* The photo backdrop. Accent only — chips, taglines, highlights. */
+  --color-rose-light: #fadce2;
+  --color-rose: #efa8b8;
+  --color-rose-deep: #a8405f;
+  --color-rose-shadow: #7d2b45;
+
+  /* The bell on her bow tie. */
+  --color-gold-light: #fbeecd;
+  --color-gold: #e8c06a;
+  --color-gold-deep: #7a5a14;
+
+  /* Warm near-black from her deepest points, so text never reads cold. */
+  --color-ink: #43372f;
+  --color-ink-soft: #6e5e52;
+
+  /* Her eye blue, softened for panels and the game sky. */
+  --color-ice-light: #eaf3f8;
+  --color-ice: #d3e6f0;
+  --color-ice-deep: #b2d2e3;
+
+  /* Foliage — the garden in the game, deliberately not part of the cat. */
+  --color-sage-light: #bccda8;
+  --color-sage: #94ab82;
+  --color-sage-deep: #6f8763;
+  --color-sage-shadow: #55684b;
+
+  --font-pixel: 'Press Start 2P', 'Courier New', monospace;
+  --font-sans:
+    ui-rounded, 'Nunito', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+
+  /* PRD §6.1: soft borders, rounded corners, thin shadows. */
+  --radius-cozy: 1.25rem;
+  --shadow-cozy: 0 2px 0 0 #ded0bb, 0 8px 20px -12px rgba(67, 55, 47, 0.42);
+  --shadow-cozy-lift: 0 4px 0 0 #ded0bb, 0 14px 28px -14px rgba(67, 55, 47, 0.48);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Keeps the fixed navbar from covering anchored sections. */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    /* A faint paper grain so large cream areas don't read as flat. */
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(67, 55, 47, 0.045) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-rose-deep;
+  }
+
+  /* Pixel art must never be smoothed. */
+  canvas {
+    image-rendering: pixelated;
+  }
+}
+
+@layer components {
+  .pixelated {
+    image-rendering: pixelated;
+  }
+
+  /* The repeated card shell: soft border, rounded, thin shadow. */
+  .cozy-card {
+    @apply rounded-cozy border-2 border-cream-deep bg-paper shadow-cozy;
+  }
+
+  .cozy-card-hover {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .cozy-card-hover:hover {
+    @apply -translate-y-1 shadow-cozy-lift;
+  }
+
+  /*
+   * Chunky pressable buttons with a hard bottom edge — the pixel-game feel.
+   * Tailwind v4 cannot `@apply` a custom component class, so the shared base is
+   * a grouped selector rather than a `.btn-pixel` that the variants extend.
+   */
+  .btn-pixel,
+  .btn-mocha,
+  .btn-rose,
+  .btn-gold,
+  .btn-ghost {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full
+           border-2 px-5 py-3 text-sm font-bold tracking-wide transition-all
+           duration-150 ease-out active:translate-y-[3px] active:shadow-none;
+  }
+
+  /*
+   * Filled buttons sit on the *deep* step, not the mid step. White on a mid
+   * tone like `mocha` lands around 2.5:1, which fails WCAG AA outright; on the
+   * deep step it clears 4.5:1. The mid steps are for fills and borders, never
+   * as a background behind white text.
+   */
+  .btn-mocha {
+    @apply border-mocha-shadow bg-mocha-deep text-white;
+    box-shadow: 0 3px 0 0 var(--color-mocha-shadow);
+  }
+
+  .btn-mocha:hover {
+    @apply bg-mocha-shadow;
+  }
+
+  .btn-rose {
+    @apply border-rose-shadow bg-rose-deep text-white;
+    box-shadow: 0 3px 0 0 var(--color-rose-shadow);
+  }
+
+  .btn-rose:hover {
+    @apply bg-rose-shadow;
+  }
+
+  .btn-gold {
+    @apply border-gold-deep bg-gold text-ink;
+    box-shadow: 0 3px 0 0 var(--color-gold-deep);
+  }
+
+  .btn-gold:hover {
+    @apply bg-gold-deep text-white;
+  }
+
+  .btn-ghost {
+    @apply border-cream-deep bg-paper text-ink;
+    box-shadow: 0 3px 0 0 var(--color-cream-deep);
+  }
+
+  .btn-ghost:hover {
+    @apply bg-cream;
+  }
+
+  /* Short headings only — never body text. */
+  .font-display {
+    font-family: var(--font-pixel);
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+  }
+
+  .chip {
+    @apply inline-flex cursor-pointer items-center gap-1.5 rounded-full border-2
+           border-cream-deep bg-paper px-3 py-1.5 text-xs font-bold
+           transition-colors duration-150;
+  }
+
+  .chip:hover {
+    @apply bg-cream;
+  }
+
+  .chip-active,
+  .chip-active:hover {
+    @apply border-mocha-shadow bg-mocha-deep text-white;
+  }
+}
+
+/*
+ * Ambient motion.
+ *
+ * Every animation below drives only `transform` and `opacity`, so the
+ * compositor handles them off the main thread and nothing triggers layout.
+ * There is no per-frame JavaScript anywhere on the page — the only JS tied to
+ * motion is one shared IntersectionObserver that toggles a class once per
+ * element. The reduced-motion block at the bottom of this file switches the
+ * whole lot off.
+ */
+
+/* Clouds drifting across the sky. */
+@keyframes cloud-drift {
+  from {
+    transform: translate3d(-20%, 0, 0);
+  }
+  to {
+    transform: translate3d(120vw, 0, 0);
+  }
+}
+
+.animate-drift {
+  animation: cloud-drift linear infinite;
+  will-change: transform;
+}
+
+/*
+ * Sprite motion is stepped, never interpolated.
+ *
+ * A smoothly-eased transform leaves a pixel-art layer sitting on fractional
+ * device pixels, and the compositor resamples it every frame — which reads as
+ * the sprite vibrating rather than moving. Rotation is worse again, because
+ * every pixel lands off-grid at once.
+ *
+ * So: `step-end` timing, whole-pixel keyframes, and even values only (2/4px)
+ * so the positions stay on-grid at 1x, 1.5x and 2x device pixel ratios. The
+ * result is the chunky bob a real sprite sheet would give, and it is rock
+ * steady.
+ */
+
+/* Idle bob for the hero cat and other resting sprites. */
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  20% {
+    transform: translate3d(0, -2px, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(0, -4px, 0);
+  }
+  80% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+.animate-float {
+  animation: soft-float 2.8s step-end infinite;
+}
+
+/* Grass and flowers nudged by a breeze — a shift, not a rotation. */
+@keyframes sway {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    transform: translate3d(2px, 0, 0);
+  }
+  70% {
+    transform: translate3d(-2px, 0, 0);
+  }
+}
+
+.animate-sway {
+  animation: sway 4s step-end infinite;
+}
+
+/* Butterfly wandering a short loop. */
+@keyframes flutter {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  20% {
+    transform: translate3d(14px, -8px, 0);
+  }
+  40% {
+    transform: translate3d(28px, -2px, 0);
+  }
+  60% {
+    transform: translate3d(42px, -10px, 0);
+  }
+  80% {
+    transform: translate3d(20px, -4px, 0);
+  }
+}
+
+.animate-flutter {
+  animation: flutter 9s step-end infinite;
+}
+
+/*
+ * Scroll reveal. The element starts shifted and transparent; one shared
+ * IntersectionObserver (src/directives/reveal.js) adds `.is-revealed` when it
+ * first enters the viewport, then stops observing it.
+ */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Floating "+10" over the game canvas. A keyframe rather than a Vue
+   transition, because the element must stay invisible after it finishes
+   rather than snapping back to its resting style. */
+@keyframes score-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.8);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-42px) scale(1);
+  }
+}
+
+.animate-score-pop {
+  animation: score-pop 700ms ease-out forwards;
+}
+
+/* Respect the OS reduced-motion preference (PRD §6.1 animations are decorative). */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Reveal must land in its *final* state, not its hidden one — otherwise
+     turning off motion would leave half the page invisible. */
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

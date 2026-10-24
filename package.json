@@ -1,0 +1,24 @@
+{
+  "name": "hey-mochi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hey Mochi — personal cat website, social hub, and pixel platformer",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "phaser": "^3.90.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@fontsource/press-start-2p": "^5.1.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "tailwindcss": "^4.0.0",
+    "vite": "^6.0.7"
+  }
+}

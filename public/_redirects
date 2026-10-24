@@ -1,0 +1,4 @@
+# SPA fallback for Netlify / Cloudflare Pages.
+# Vue Router runs in history mode, so a hard refresh on /play must still be
+# served index.html instead of 404ing.
+/*  /index.html  200

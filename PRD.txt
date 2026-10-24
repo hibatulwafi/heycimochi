@@ -1,0 +1,376 @@
+# PRD — Little Paw World
+**Personal Cat Website, Social Media Hub & Pixel Platformer**
+
+| Informasi | Detail |
+|---|---|
+| Nama proyek | Little Paw World |
+| Versi | MVP 1.0 |
+| Status | Planning |
+| Platform | Responsive Web |
+| Frontend | Vue.js 3, Vite, Tailwind CSS |
+| Game Engine | Phaser 3 |
+| Backend | Tidak ada |
+| Database | Tidak ada |
+| Target awal | Website personal yang dapat dikembangkan menjadi website publik |
+
+## 1. Ringkasan Produk
+
+Little Paw World adalah website personal untuk memperkenalkan kucing melalui profil, galeri foto, cerita, dan integrasi tautan media sosial. Website dilengkapi game pixel art 2D platformer yang memungkinkan pengunjung bermain menggunakan karakter yang terinspirasi dari kucing asli.
+
+Website dirancang dengan gaya visual cozy pixel art pastel, mengutamakan pengalaman yang menyenangkan, ringan, responsif, dan mudah dibagikan.
+
+Pada tahap MVP, seluruh konten menggunakan data statis di dalam source code. Tidak ada autentikasi, backend, database, atau sistem pengelolaan konten dinamis.
+
+## 2. Tujuan Produk
+
+1. Menyediakan profil digital yang menarik untuk kucing.
+2. Mengarahkan pengunjung ke akun Instagram dan TikTok kucing.
+3. Menampilkan video media sosial melalui embed atau tautan resmi yang didukung platform.
+4. Menyediakan game pixel platformer yang dapat dimainkan langsung melalui browser.
+5. Membangun fondasi frontend yang mudah dikembangkan pada fase berikutnya.
+
+## 3. Target Pengguna
+
+- Pemilik kucing yang ingin memiliki website personal.
+- Pengunjung yang ingin mengenal kucing melalui profil dan galeri.
+- Pengguna media sosial yang menemukan website dari Instagram atau TikTok.
+- Pengunjung yang tertarik mencoba game kasual berbasis browser.
+
+## 4. Ruang Lingkup MVP
+
+### 4.1 Homepage
+
+Homepage menjadi halaman utama untuk memperkenalkan identitas kucing dan mengarahkan pengunjung ke fitur utama.
+
+Fitur:
+- Hero section dengan ilustrasi pixel art kucing.
+- Nama, bio singkat, dan tagline website.
+- Tombol navigasi menuju profil, media sosial, dan game.
+- Preview konten media sosial.
+- Preview fitur game dan tombol Play.
+- Section kenangan atau foto pilihan.
+- Footer berisi tautan media sosial.
+
+### 4.2 Cat Profile
+
+Halaman `/cat` berisi profil kucing.
+
+Data yang ditampilkan:
+- Nama panggilan.
+- Foto profil asli.
+- Avatar pixel art.
+- Umur atau tanggal lahir.
+- Deskripsi kepribadian.
+- Hal yang disukai dan tidak disukai.
+- Galeri foto.
+- Cerita singkat tentang kucing.
+
+Seluruh data disimpan sebagai objek statis atau file konfigurasi di dalam proyek Vue.
+
+### 4.3 Social Media Hub
+
+Halaman `/socials` menjadi pusat tautan media sosial kucing.
+
+Fitur:
+- Tombol menuju Instagram.
+- Tombol menuju TikTok.
+- Embed video yang didukung secara resmi.
+- Kartu video dengan thumbnail, judul, dan tautan sumber.
+- Tombol Follow atau Watch yang mengarahkan pengunjung ke akun atau konten asli.
+- Tampilan responsif untuk desktop dan perangkat mobile.
+
+**Ketentuan sinkronisasi:** pada MVP tanpa backend, database, atau API integration, video tidak dapat dijamin terambil dan diperbarui otomatis. Daftar video menggunakan konfigurasi statis dan embed resmi. Pengambilan konten otomatis melalui API dapat ditambahkan pada fase pengembangan berikutnya apabila akses API tersedia.
+
+### 4.4 Pixel Platformer Game
+
+Game menjadi salah satu fitur unggulan Little Paw World dan dapat diakses melalui halaman `/play`.
+
+Konsep game:
+- Game platformer 2D dengan karakter kucing.
+- Lingkungan pastel seperti taman, halaman rumah, atau dunia fantasi.
+- Karakter dapat berjalan, berlari, dan melompat.
+- Pemain mengumpulkan ikan atau koin.
+- Terdapat platform, rintangan, dan area tujuan.
+- Terdapat sistem skor dan layar Game Over atau Level Complete.
+- Pemain dapat memulai kembali permainan.
+
+Kontrol desktop:
+- A/D atau panah kiri/kanan untuk bergerak.
+- Space atau panah atas untuk melompat.
+- Tombol restart pada layar hasil.
+
+Kontrol mobile:
+- Tombol virtual kiri dan kanan.
+- Tombol virtual lompat.
+- Layout game menyesuaikan ukuran layar.
+
+Teknis:
+- Phaser 3 sebagai game engine.
+- Game diintegrasikan ke komponen Vue.
+- Sprite, tileset, dan level disimpan sebagai aset lokal.
+- Skor dan progres hanya tersimpan selama sesi permainan, kecuali ditambahkan penyimpanan lokal secara eksplisit.
+
+### 4.5 Cat Memories
+
+Halaman `/memories` berisi kumpulan kenangan kucing.
+
+Fitur:
+- Galeri foto.
+- Judul dan caption.
+- Tanggal kenangan.
+- Kategori seperti Daily Life, Funny Moments, dan Special Days.
+- Tampilan grid atau kartu foto responsif.
+
+Konten diambil dari file konfigurasi statis. Fitur unggah foto dari pengunjung tidak termasuk dalam MVP.
+
+## 5. Navigasi Website
+
+| Route | Halaman |
+|---|---|
+| `/` | Homepage |
+| `/cat` | Cat Profile |
+| `/socials` | Social Media Hub |
+| `/play` | Pixel Platformer |
+| `/memories` | Cat Memories |
+
+Navigasi menggunakan Vue Router. Semua route harus dapat dibuka langsung dan tetap berfungsi setelah deployment static hosting, dengan konfigurasi fallback routing yang sesuai.
+
+## 6. Desain UI/UX
+
+### 6.1 Visual Direction
+
+Tema: Cozy Pixel Art Pastel.
+
+Karakteristik desain:
+- Palet pastel cream, sage green, dusty pink, dan butter yellow.
+- Pixel art sebagai elemen visual utama.
+- Tipografi yang mudah dibaca.
+- Border lembut, sudut membulat, dan bayangan tipis.
+- Animasi hover dan transisi ringan.
+- Layout minimalis yang tidak mengganggu konten.
+- Game mempertahankan pixel rendering yang tajam.
+
+### 6.2 Homepage Layout
+
+Urutan section:
+1. Navbar dan logo pixel paw.
+2. Hero section dengan tagline dan ilustrasi kucing.
+3. CTA Play Adventure dan Meet My Cat.
+4. Preview profil kucing.
+5. Social media highlights.
+6. Preview Cat Memories.
+7. Game promotion section.
+8. Footer dan social links.
+
+### 6.3 Responsivitas
+
+- Desktop: hero dua kolom dan game dengan area bermain yang luas.
+- Tablet: layout adaptif dengan grid yang lebih ringkas.
+- Mobile: navigasi ringkas, tombol game berukuran nyaman, dan konten satu kolom jika diperlukan.
+
+## 7. Teknologi dan Struktur Proyek
+
+Stack:
+- Vue.js 3 dengan Composition API.
+- Vite.
+- Tailwind CSS.
+- Vue Router.
+- Phaser 3.
+- JavaScript atau TypeScript sesuai keputusan implementasi.
+
+Struktur direktori yang disarankan:
+
+```text
+little-paw-world/
+├── public/
+│   ├── images/
+│   ├── sprites/
+│   ├── tilesets/
+│   └── audio/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── AppNavbar.vue
+│   │   ├── AppFooter.vue
+│   │   ├── CatProfileCard.vue
+│   │   ├── SocialVideoCard.vue
+│   │   └── GameCanvas.vue
+│   ├── data/
+│   │   ├── catProfile.js
+│   │   ├── socialLinks.js
+│   │   ├── socialVideos.js
+│   │   └── memories.js
+│   ├── game/
+│   │   ├── config.js
+│   │   ├── scenes/
+│   │   ├── entities/
+│   │   └── levels/
+│   ├── pages/
+│   │   ├── HomePage.vue
+│   │   ├── CatPage.vue
+│   │   ├── SocialsPage.vue
+│   │   ├── PlayPage.vue
+│   │   └── MemoriesPage.vue
+│   ├── router/
+│   │   └── index.js
+│   ├── App.vue
+│   └── main.js
+├── package.json
+└── vite.config.js
+```
+
+## 8. Pengelolaan Data Statis
+
+Seluruh konten diletakkan di folder `src/data/`.
+
+Contoh konfigurasi profil:
+
+```js
+export default {
+  name: "Nama Kucing",
+  tagline: "A tiny cat with a big personality.",
+  birthday: null,
+  bio: "Perkenalan singkat tentang kucing.",
+  likes: ["Tidur", "Makanan", "Bermain"],
+  avatar: "/images/cat-profile.png",
+  pixelAvatar: "/sprites/cat-idle.png"
+};
+```
+
+Contoh konfigurasi media sosial:
+
+```js
+export default {
+  instagram: {
+    username: "",
+    profileUrl: "",
+    enabled: true
+  },
+  tiktok: {
+    username: "",
+    profileUrl: "",
+    enabled: true
+  }
+};
+```
+
+Contoh daftar video statis:
+
+```js
+export default [
+  {
+    id: "reel-01",
+    platform: "instagram",
+    title: "Daily Cat Moments",
+    videoUrl: "",
+    embedUrl: "",
+    thumbnail: "/images/video-placeholder.png"
+  },
+  {
+    id: "tiktok-01",
+    platform: "tiktok",
+    title: "Funny Cat Moments",
+    videoUrl: "",
+    embedUrl: "",
+    thumbnail: "/images/video-placeholder.png"
+  }
+];
+```
+
+URL akun dan video akan diisi dengan tautan asli. Jangan memasukkan token API atau kredensial rahasia ke dalam source code frontend.
+
+## 9. Kebutuhan Fungsional
+
+| ID | Requirement | Prioritas |
+|---|---|---|
+| FR-01 | Homepage menampilkan identitas kucing dan navigasi utama | Must Have |
+| FR-02 | Profil kucing dapat dilihat tanpa login | Must Have |
+| FR-03 | Tombol Instagram dan TikTok membuka akun yang sesuai | Must Have |
+| FR-04 | Social media hub menampilkan kartu video statis dan embed yang didukung | Must Have |
+| FR-05 | Game platformer dapat dimainkan di browser desktop | Must Have |
+| FR-06 | Game memiliki skor, collectible, dan kondisi penyelesaian level | Must Have |
+| FR-07 | Game mendukung kontrol dasar perangkat mobile | Should Have |
+| FR-08 | Galeri kenangan menampilkan foto dan caption | Must Have |
+| FR-09 | Navigasi dan layout responsif | Must Have |
+| FR-10 | Achievement dan dekorasi tambahan | Could Have |
+| FR-11 | Sinkronisasi video otomatis melalui API | Out of Scope MVP |
+
+## 10. Kebutuhan Nonfungsional
+
+- Tidak membutuhkan server backend atau database.
+- Dapat di-deploy pada static hosting.
+- Waktu muat awal dioptimalkan melalui ukuran gambar dan aset yang efisien.
+- Gambar menggunakan format modern bila memungkinkan.
+- Game tidak memulai audio secara otomatis.
+- Kontrol game dapat digunakan dengan keyboard dan layar sentuh.
+- Semua tautan eksternal menggunakan URL yang benar dan aman.
+- Embed media sosial menyediakan fallback apabila gagal dimuat.
+- Tidak ada data pengunjung yang dikumpulkan secara diam-diam.
+
+## 11. Rencana Implementasi
+
+### Sprint 1 — Foundation & Homepage
+- Inisialisasi Vue 3, Vite, Tailwind CSS, dan Vue Router.
+- Membuat struktur direktori dan konfigurasi data statis.
+- Membuat navbar, footer, hero, dan homepage.
+- Membuat layout responsif.
+
+### Sprint 2 — Cat Profile & Social Media
+- Membuat halaman profil kucing.
+- Membuat galeri dan memories.
+- Membuat social media hub.
+- Mengintegrasikan tautan akun Instagram dan TikTok.
+- Menguji embed video serta fallback jika embed tidak tersedia.
+
+### Sprint 3 — Phaser Platformer
+- Mengintegrasikan Phaser 3 ke Vue.
+- Membuat karakter dan animasi dasar.
+- Membuat level pertama beserta platform dan collision.
+- Menambahkan collectible dan sistem skor.
+- Membuat layar Game Over, Level Complete, dan restart.
+
+### Sprint 4 — Polish & Deployment
+- Menambahkan kontrol mobile.
+- Mengoptimalkan aset dan loading game.
+- Melakukan pengujian responsive dan navigasi.
+- Menguji tautan eksternal dan embed.
+- Deploy ke static hosting.
+- Menyiapkan dokumentasi konfigurasi konten.
+
+## 12. Acceptance Criteria
+
+MVP dianggap selesai jika:
+
+1. Semua halaman utama dapat dibuka dan navigasi berfungsi.
+2. Profil kucing menampilkan data statis dengan benar.
+3. Tombol Instagram dan TikTok mengarah ke URL yang telah dikonfigurasi.
+4. Kartu video dan embed menampilkan konten ketika URL didukung dan tersedia.
+5. Kegagalan embed tidak merusak layout dan tetap menyediakan tautan video asli.
+6. Game dapat dimainkan, karakter dapat bergerak dan melompat, collectible berfungsi, dan skor bertambah.
+7. Game memiliki kondisi kalah atau selesai dan dapat dimainkan kembali.
+8. Layout berfungsi pada desktop dan mobile.
+9. Website dapat di-deploy tanpa backend atau database.
+10. Konten dapat diperbarui melalui file konfigurasi tanpa mengubah komponen utama.
+
+## 13. Batasan MVP
+
+- Tidak ada akun pengguna atau autentikasi.
+- Tidak ada database dan backend.
+- Tidak ada dashboard admin.
+- Tidak ada upload foto melalui website.
+- Tidak ada leaderboard lintas perangkat.
+- Tidak ada sinkronisasi otomatis Instagram Reels dan TikTok melalui API.
+- Tidak ada jaminan jumlah follower atau statistik media sosial ditampilkan secara live.
+
+## 14. Rencana Pengembangan Berikutnya
+
+Setelah MVP tervalidasi, website dapat dikembangkan dengan:
+- Integrasi resmi Instagram dan TikTok API.
+- Dashboard pengelolaan konten.
+- Backend Laravel dan database jika dibutuhkan.
+- Leaderboard online.
+- Penyimpanan progres game lintas perangkat.
+- Sistem achievement, koleksi, dan profil pengunjung.
+- Halaman komunitas dan fitur follow internal.
+
+**Definisi keberhasilan MVP:** pengunjung dapat mengenal kucing, membuka media sosialnya, melihat konten video yang disediakan, dan memainkan game platformer tanpa perlu membuat akun atau menginstal aplikasi.
